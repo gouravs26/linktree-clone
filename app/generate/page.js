@@ -1,13 +1,13 @@
 'use client'
-import React, { use, useState } from 'react'
+import React, { use, useState, Suspense } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from "next/navigation";
 import Lottie from "lottie-react";
 import loadingAnimation from "@/animations/loading.json";
 
-const Generate = () => {
-     const router = useRouter();
+const GenerateContent = () => {
+    const router = useRouter();
     const searchParams = useSearchParams();
     const [links, setlinks] = useState([{ link: "", linktext: "" }])
     const [handle, setHandle] = useState(searchParams.get('handle'))
@@ -162,4 +162,10 @@ const Generate = () => {
     )
 }
 
-export default Generate
+export default function Generate() {
+    return (
+        <Suspense fallback={<div className="text-white text-center mt-10">Loading...</div>}>
+            <GenerateContent />
+        </Suspense>
+    );
+}
