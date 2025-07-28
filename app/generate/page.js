@@ -33,7 +33,8 @@ const GenerateContent = () => {
             redirect: "follow"
         };
 
-        const r = await fetch("http://localhost:3000/api/add", requestOptions)
+        // Use relative path for API endpoint to work in any environment
+        const r = await fetch("/api/add", requestOptions)
         const result = await r.json();
         console.log(result);
         if (result.success) {
